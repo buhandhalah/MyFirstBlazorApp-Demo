@@ -1,0 +1,40 @@
+﻿<input type="checkbox" @bind="DisplayEmail" /><label>Display Email</label>
+
+@if(Contacts is null)
+{
+    @*<span>Contacts are laoding..</span>*@
+    @NullContact
+}
+else if(Contacts.Count == 0)
+{
+    @*<span>No Contacts to display</span>*@
+    @EmptyContact
+}
+else
+{
+    @foreach (var contact in Contacts)
+{
+    @*<ContactComponent1 FirstName="@contact.FirstName" LastName="@contact.LastName" Email="@contact.Email"></ContactComponent1>*@
+    <ContactComponent1 currentContact="contact" DisplayEmail="DisplayEmail" DeleteCurrContact="DeleteContact"></ContactComponent1>
+}
+}
+
+
+
+@code {
+    [Parameter]
+    public RenderFragment NullContact { get; set; }
+
+    [Parameter]
+    public RenderFragment EmptyContact { get; set; }
+
+    [Parameter]
+    public  List<Contact> Contacts {get; set;}
+
+    private bool DisplayEmail = false;
+
+      private void DeleteContact(Contact contact)
+    {
+        Contacts.Remove(contact);
+    }
+}

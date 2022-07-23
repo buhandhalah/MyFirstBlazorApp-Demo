@@ -1,0 +1,42 @@
+﻿
+
+<p>
+    @*<b>Name : @FirstName - @LastName</b>
+    <br /> <b>Email : @Email </b>*@
+
+    <b> Name : @currentContact.FirstName - @currentContact.LastName</b>
+
+    @if (DisplayEmail)
+    {
+        <br />
+        <b> Email : @currentContact.Email </b>
+    }
+    @if (displayInfo)
+    {
+        <span>The Email Address of @currentContact.FirstName is  @currentContact.Email</span>
+    }
+    <br />
+    @*<button onclick="@(() => {displayInfo = !displayInfo;} )">Show Info</button>*@
+    <button onclick="@(() => {displayInfo = !displayInfo;} )">Show Info</button>
+    <button onclick="@(() => {DeleteCurrContact.InvokeAsync(currentContact); })">Delete</button>
+</p>
+
+@code {
+    [Parameter]
+    public bool DisplayEmail { get; set; }
+
+    [Parameter]
+    public Contact currentContact { get; set; }
+
+    private bool displayInfo = false;
+
+    [Parameter]
+    public EventCallback<Contact> DeleteCurrContact{ get; set; }
+   
+    //[Parameter]
+    //public string FirstName { get; set; }
+    //[Parameter]
+    //public string LastName { get; set; }
+    //[Parameter]
+    //public string Email { get; set; }
+}

@@ -1,0 +1,53 @@
+﻿@page "/"
+@using MyFirstBalzorServerApp.Pages.ContactComponents
+
+@*<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />*@
+
+@*<input type="checkbox" onchange="@(() => {DisplayEmail = !DisplayEmail;})" /><label>Display Email</label>
+<input type="checkbox" @bind="DisplayEmail" /><label>Display Email</label>*@
+
+@*@foreach (var contact in contacts)
+{
+    <ContactComponent1 FirstName="@contact.FirstName" LastName="@contact.LastName" Email="@contact.Email"></ContactComponent1>
+    <ContactComponent1 currentContact="contact" DisplayEmail="DisplayEmail" DeleteCurrContact="DeleteContact"></ContactComponent1>
+}*@
+<h1>Index Page</h1>
+<ContactsList Contacts="contacts">
+    <NullContact>
+ <br />
+    <span>Contacts are loading..(From Index Razor)</span>
+    <br />
+    </NullContact>
+
+    <EmptyContact>
+       <span>No Contacts to display.. (From Index Razor)</span>
+    </EmptyContact>
+   
+</ContactsList>
+
+<br />
+
+<MyTextBox placeholder="Place holder 01" type="text" disabled="disabled"></MyTextBox>
+<MyTextBox @attributes="@(new Dictionary<string, object>
+{
+{"disabled", "disabled"},
+{"placeholder", "Contact Num"},
+{"type", "text"}
+})"></MyTextBox>
+<MyTextBox @attributes="@MyTextBoxAttributes"></MyTextBox>
+@*@code {
+    //private bool DisplayEmail = false;
+    
+
+    //protected override void OnInitialized()
+    //{
+    //    base.OnInitialized();
+
+    //}
+}*@
